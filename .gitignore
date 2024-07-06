@@ -1,5 +1,6 @@
 .idea
-venv
+virt
+migrations
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
