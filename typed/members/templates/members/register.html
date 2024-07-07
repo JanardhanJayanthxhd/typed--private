@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}typed - register{% endblock %}
+
+{% block content %}
+    {% if form.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Errors during registration
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+    <br>
+    <h1>Register</h1>
+    <br>
+    <form action="{% url 'register_user' %}" method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn btn-dark" type="submit">Register</button>
+        </div>
+    </form>
+
+{% endblock %}
