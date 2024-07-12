@@ -1,4 +1,4 @@
-from .models import Blog, Category
+from .models import Blog
 from django.forms import ModelForm
 from django import forms
 

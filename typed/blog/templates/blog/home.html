@@ -9,6 +9,12 @@
       {% for blog in blogs %}
         <li class="list-group-item">
           <a class="link-dark" href="{% url 'blog_info' blog.id %}">{{ blog.title }}</a>
+          {% if user.username == blog.user.username or user.is_superuser %}
+            <a class="link-primary" href="{% url 'edit_blog' blog.id %}">Edit</a>
+            <a class="link-danger" href="{% url 'delete_blog' blog.id %}">Delete</a>
+          {% endif %}
+          
+
         </li>
       {% endfor %}
     </ul>

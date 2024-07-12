@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.models import User
 from .models import Blog
 from .forms import BlogForm
 
@@ -10,6 +9,22 @@ def home(request):
     return render(request, 'blog/home.html',
                   {'blogs': all_blogs})
 
+def delete_blog(request, blog_id):
+    blog_to_del = Blog.objects.get(pk=blog_id)
+    blog_to_del.delete()
+    messages.success(request, 'blog deleted')
+    return redirect('home')
+
+
+def edit_blog(request, blog_id):
+    blog_to_edit = Blog.objects.get(pk=blog_id)
+    form = BlogForm(request.POST or None, instance=blog_to_edit)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Blog edited successfully')
+        return redirect('home')
+    return render(request, 'blog/edit_blog.html', 
+                  {'form': form, 'blog': blog_to_edit})
 
 def add_blog(request):
     if request.user.is_authenticated:
@@ -35,7 +50,5 @@ def add_blog(request):
 
 def blog_info(request, blog_id):
     blog = Blog.objects.get(pk=blog_id)
-    blog_owner = blog.user
-    print(blog.content, f'owner {blog_owner}')
     return render(request, 'blog/blog_info.html',
-                  {'blog': blog, 'owner': blog_owner})
+                  {'blog': blog})

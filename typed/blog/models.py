@@ -17,7 +17,7 @@ class Blog(models.Model):
     tags = models.ManyToManyField(Category, related_name='blogs')
 
     title = models.CharField('BLog Title', max_length=150, null=False, blank=False)
-    content = RichTextField(blank=True, null=True)
+    content = RichTextField('Content', blank=True, null=True, config_name='default')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

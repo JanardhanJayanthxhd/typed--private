@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}typed - edit blog{% endblock %}
+
+{% block content %}
+    <br>
+    <h1>Editing {{ blog.title }}</h1>
+    <br>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.media }}
+        {{ form.as_p }}
+
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn btn-dark" type="submit">Submit</button>
+        </div>
+    </form>
+
+    <br>
+
+{% endblock %}
